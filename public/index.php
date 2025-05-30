@@ -16,8 +16,9 @@
 //     "message" => "Mini Support Ticketing System is running!",
 //     "db_status" => $conn ? "Connected" : "Not Connected"
 // ]);
-
-$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$requestUri = $_SERVER['REQUEST_URI'];
+$basePath = '/mini-ticket-system/public';
+$uri = str_replace($basePath, '', parse_url($requestUri, PHP_URL_PATH));
 
 switch ($uri) {
     case '/auth':
