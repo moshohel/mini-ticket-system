@@ -29,9 +29,9 @@ switch ($uri) {
         require __DIR__ . '/../routes/departments.php';
         break;
     case '/tickets':
-        require __DIR__ . '/../routes/ticket.php';
+        require __DIR__ . '/../routes/tickets.php';
         break;
-    case '/notes':
+    case '/ticket-notes':
         require __DIR__ . '/../routes/note.php';
         break;
     default:
