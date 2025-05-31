@@ -18,6 +18,7 @@
 // ]);
 $requestUri = $_SERVER['REQUEST_URI'];
 $basePath = '/mini-ticket-system/public';
+$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $uri = str_replace($basePath, '', parse_url($requestUri, PHP_URL_PATH));
 
 switch ($uri) {

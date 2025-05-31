@@ -10,7 +10,8 @@ class Department
 
     public function __construct()
     {
-        $this->conn = Database::connect();
+        $database = new Database();
+        $this->conn = $database->connect();
     }
 
     public function getAll()
