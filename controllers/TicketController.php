@@ -58,4 +58,52 @@ class TicketController
             echo json_encode(['error' => 'Failed to create ticket: ' . $e->getMessage()]);
         }
     }
+
+    public function assignToSelf($id, $user)
+    {
+        if (($user['role'] ?? '') !== 'agent') {
+            http_response_code(403);
+            echo json_encode(['error' => 'Only agents can assign tickets']);
+            return;
+        }
+
+        if ($this->ticketModel->assignToAgent($id, $user['id'])) {
+            echo json_encode(['message' => 'Ticket assigned']);
+        } else {
+            http_response_code(500);
+            echo json_encode(['error' => 'Assignment failed']);
+        }
+    }
+
+    public function updateStatus($id, $data, $user)
+    {
+        if (!isset($data['status']) || !in_array($data['status'], ['open', 'in_progress', 'closed'])) {
+            http_response_code(400);
+            echo json_encode(['error' => 'Invalid or missing status']);
+            return;
+        }
+
+        if ($this->ticketModel->updateStatus($id, $data['status'])) {
+            echo json_encode(['message' => 'Status updated']);
+        } else {
+            http_response_code(500);
+            echo json_encode(['error' => 'Update failed']);
+        }
+    }
+
+    public function delete($id, $user)
+    {
+        if (($user['role'] ?? '') !== 'admin') {
+            http_response_code(403);
+            echo json_encode(['error' => 'Only admin can delete tickets']);
+            return;
+        }
+
+        if ($this->ticketModel->delete($id)) {
+            echo json_encode(['message' => 'Ticket deleted']);
+        } else {
+            http_response_code(500);
+            echo json_encode(['error' => 'Deletion failed']);
+        }
+    }
 }

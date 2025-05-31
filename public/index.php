@@ -31,6 +31,9 @@ switch ($uri) {
     case '/tickets':
         require __DIR__ . '/../routes/ticket.php';
         break;
+    case '/notes':
+        require __DIR__ . '/../routes/note.php';
+        break;
     default:
         http_response_code(404);
         echo json_encode(['error' => 'Route not found']);

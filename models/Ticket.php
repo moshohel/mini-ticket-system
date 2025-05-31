@@ -41,4 +41,10 @@ class Ticket
         $stmt = $this->conn->prepare("UPDATE tickets SET status = :status WHERE id = :ticketId");
         return $stmt->execute(['status' => $status, 'ticketId' => $ticketId]);
     }
+
+    public function delete($id)
+    {
+        $stmt = $this->conn->prepare("DELETE FROM tickets WHERE id = :id");
+        return $stmt->execute(['id' => $id]);
+    }
 }
