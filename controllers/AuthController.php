@@ -16,7 +16,7 @@ class AuthController
         }
 
         $hashed = password_hash($data['password'], PASSWORD_DEFAULT);
-        $user->create($data['name'], $data['email'], $hashed);
+        $user->create($data['name'], $data['email'], $hashed, $data['role']);
         jsonResponse(['message' => 'User registered']);
     }
 
