@@ -1,4 +1,5 @@
 <?php
+
 require_once __DIR__ . '/../models/Ticket.php';
 
 class TicketController
@@ -26,56 +27,35 @@ class TicketController
         }
     }
 
-    public function store()
+    public function store($data, $user)
     {
-        $data = json_decode(file_get_contents("php://input"), true);
-        if (!isset($data['title'], $data['description'], $data['department_id'])) {
+        $user_id = $user['id'] ?? null;
+        $department_id = $data['department_id'] ?? null;
+
+        if (!$user_id) {
+            http_response_code(401);
+            echo json_encode(['error' => 'Unauthorized User with no user id']);
+            return;
+        }
+
+        if (!$department_id) {
             http_response_code(400);
-            echo json_encode(['error' => 'Missing required fields']);
+            echo json_encode(['error' => 'Missing department_id']);
             return;
         }
 
-        $data['user_id'] = $_SESSION['user']['id']; // from middleware
-        if ($this->ticketModel->create($data)) {
-            http_response_code(201);
-            echo json_encode(['message' => 'Ticket submitted']);
-        } else {
+        try {
+            $this->ticketModel->create([
+                'title' => $data['title'] ?? '',
+                'description' => $data['description'] ?? '',
+                'user_id' => $user_id,
+                'department_id' => $department_id
+            ]);
+
+            echo json_encode(['message' => 'Ticket created']);
+        } catch (Exception $e) {
             http_response_code(500);
-            echo json_encode(['error' => 'Ticket creation failed']);
-        }
-    }
-
-    public function assignToSelf($id)
-    {
-        $user = $_SESSION['user'];
-        if ($user['role'] !== 'agent') {
-            http_response_code(403);
-            echo json_encode(['error' => 'Unauthorized']);
-            return;
-        }
-
-        if ($this->ticketModel->assignToAgent($id, $user['id'])) {
-            echo json_encode(['message' => 'Ticket assigned']);
-        } else {
-            http_response_code(500);
-            echo json_encode(['error' => 'Assignment failed']);
-        }
-    }
-
-    public function updateStatus($id)
-    {
-        $data = json_decode(file_get_contents("php://input"), true);
-        if (!in_array($data['status'], ['open', 'in_progress', 'closed'])) {
-            http_response_code(400);
-            echo json_encode(['error' => 'Invalid status']);
-            return;
-        }
-
-        if ($this->ticketModel->updateStatus($id, $data['status'])) {
-            echo json_encode(['message' => 'Status updated']);
-        } else {
-            http_response_code(500);
-            echo json_encode(['error' => 'Update failed']);
+            echo json_encode(['error' => 'Failed to create ticket: ' . $e->getMessage()]);
         }
     }
 }
