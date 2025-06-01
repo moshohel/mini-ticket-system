@@ -1,5 +1,4 @@
 <?php
-// controllers/DepartmentController.php
 
 require_once __DIR__ . '/../models/Department.php';
 require_once __DIR__ . '/../helpers/response.php';

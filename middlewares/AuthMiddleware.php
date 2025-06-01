@@ -1,5 +1,6 @@
 <?php
-// middlewares/AuthMiddleware.php
+
+require_once __DIR__ . '/RateLimiter.php';
 
 function authMiddleware(): array|null
 {
@@ -13,6 +14,8 @@ function authMiddleware(): array|null
 
     $token = trim(str_replace('Bearer', '', $headers['Authorization']));
 
+    rateLimitMiddleware($token);
+
     $tokensFile = __DIR__ . '/../storage/tokens.json';
     if (!file_exists($tokensFile)) {
         http_response_code(401);
@@ -24,7 +27,7 @@ function authMiddleware(): array|null
 
     foreach ($tokens as $storedToken => $user) {
         if ($storedToken === $token) {
-            return $user; // return user data (e.g., ['id' => 1, 'role' => 'admin'])
+            return $user;
         }
     }
 
