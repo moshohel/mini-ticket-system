@@ -1,0 +1,641 @@
+{
+	"info": {
+		"_postman_id": "5ef0a3f5-a9f0-44e0-8ad0-3c401af64a53",
+		"name": "Mini ticket system",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8340173"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Agent User\",\r\n  \"email\": \"agentUser@example.com\",\r\n  \"password\": \"secret\",\r\n  \"role\": \"agent\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/mini-ticket-system/public/auth?action=register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"mini-ticket-system",
+								"public",
+								"auth"
+							],
+							"query": [
+								{
+									"key": "action",
+									"value": "register"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"adminTwo@example.com\",\r\n  \"password\": \"secret\"\r\n}\r\n"
+						},
+						"url": {
+							"raw": "http://localhost/mini-ticket-system/public/auth?action=login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"mini-ticket-system",
+								"public",
+								"auth"
+							],
+							"query": [
+								{
+									"key": "action",
+									"value": "login"
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer c13bde42890ce4579ba62bddc1a21d624d2999febb708bc9f4c0d19e422a1d30",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n"
+						},
+						"url": {
+							"raw": "http://localhost/mini-ticket-system/public/auth?action=logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"mini-ticket-system",
+								"public",
+								"auth"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "action",
+									"value": "logout"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Departments",
+			"item": [
+				{
+					"name": "Get all departments",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer 8b6e563dc8f47b545448f872fdea37865d15a303a9bfd0a160fb4e8c3ba13cd0",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost/mini-ticket-system/public/departments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"mini-ticket-system",
+								"public",
+								"departments"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create new Department",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer b209745da02ecc647512c3359430743546a63bff9d2b926941054a8fe7012cbf",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Marketing\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/mini-ticket-system/public/departments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"mini-ticket-system",
+								"public",
+								"departments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Departmnet",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer 8b6e563dc8f47b545448f872fdea37865d15a303a9bfd0a160fb4e8c3ba13cd0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Accounts Development\"\r\n    \r\n}"
+						},
+						"url": {
+							"raw": "http://localhost/mini-ticket-system/public/departments?id=6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"mini-ticket-system",
+								"public",
+								"departments"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Department",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer 8b6e563dc8f47b545448f872fdea37865d15a303a9bfd0a160fb4e8c3ba13cd0",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost/mini-ticket-system/public/departments?id=6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"mini-ticket-system",
+								"public",
+								"departments"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "6"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ticket",
+			"item": [
+				{
+					"name": "Create or Submit new Ticket",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer a1bdbfc172d3a5d846848c5fa16943e3838b68c25022c65e7db1f7081fcff165",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Issue with login\",\r\n  \"description\": \"Cannot log in with my credentials.\",\r\n  \"department_id\": 4\r\n}\r\n\r\n"
+						},
+						"url": {
+							"raw": "http://localhost/mini-ticket-system/public/tickets",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"mini-ticket-system",
+								"public",
+								"tickets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all tickets",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer a1bdbfc172d3a5d846848c5fa16943e3838b68c25022c65e7db1f7081fcff165",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost/mini-ticket-system/public/tickets",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"mini-ticket-system",
+								"public",
+								"tickets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single Ticket",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer a1bdbfc172d3a5d846848c5fa16943e3838b68c25022c65e7db1f7081fcff165",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost/mini-ticket-system/public/tickets?id=5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"mini-ticket-system",
+								"public",
+								"tickets"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Ticket",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer 71507db539560a06cca4dbe8882f34aecad74b5f67989cea15e549c5c2246839",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"status\": \"in_progress\",\r\n  \"assigned_to\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/mini-ticket-system/public/tickets?action=status&id=5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"mini-ticket-system",
+								"public",
+								"tickets"
+							],
+							"query": [
+								{
+									"key": "action",
+									"value": "status"
+								},
+								{
+									"key": "id",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Ticket",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer 71507db539560a06cca4dbe8882f34aecad74b5f67989cea15e549c5c2246839",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost/mini-ticket-system/public/tickets?id=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"mini-ticket-system",
+								"public",
+								"tickets"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Assign Agent user",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer 44b21f73f033b5107605e6f98b00d2c6ef128c3f0e484d0d74635e52cb462ba7",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"assigned_to\": 11\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost/mini-ticket-system/public/tickets?action=assign&id=5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"mini-ticket-system",
+								"public",
+								"tickets"
+							],
+							"query": [
+								{
+									"key": "action",
+									"value": "assign"
+								},
+								{
+									"key": "id",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ticket Notes",
+			"item": [
+				{
+					"name": "Add Note",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer e016d52b3df2b53e92348c188ea95c9e92447af37ff9c3d7b58e31fad127cde4",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"ticket_id\": 9,\r\n  \"note\": \"Investigating the issue.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/mini-ticket-system/public/ticket-notes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"mini-ticket-system",
+								"public",
+								"ticket-notes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Note",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer e016d52b3df2b53e92348c188ea95c9e92447af37ff9c3d7b58e31fad127cde4",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n}\r\n"
+						},
+						"url": {
+							"raw": "http://localhost/mini-ticket-system/public/ticket-notes?ticket_id=9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"mini-ticket-system",
+								"public",
+								"ticket-notes"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "ticket_id",
+									"value": "9"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
