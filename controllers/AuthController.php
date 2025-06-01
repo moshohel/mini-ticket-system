@@ -12,12 +12,12 @@ class AuthController
         $existing = $user->findByEmail($data['email']);
 
         if ($existing) {
-            jsonResponse(['error' => 'Email already exists'], 400);
+            jsonResponse(null, 'Email already exists', 400, 'Duplicate email');
         }
 
         $hashed = password_hash($data['password'], PASSWORD_DEFAULT);
         $user->create($data['name'], $data['email'], $hashed, $data['role']);
-        jsonResponse(['message' => 'User registered']);
+        jsonResponse(null, 'User registered successfully', 201);
     }
 
     public function login($data)
@@ -26,13 +26,12 @@ class AuthController
         $found = $user->findByEmail($data['email']);
 
         if (!$found || !password_verify($data['password'], $found['password_hash'])) {
-            jsonResponse(['error' => 'Invalid credentials'], 401);
+            jsonResponse(null, 'Invalid email or password', 401, 'Authentication failed');
         }
 
         $token = generateToken();
         saveToken($token, ['id' => $found['id'], 'role' => $found['role']]);
-
-        jsonResponse(['message' => 'Login successful', 'token' => $token]);
+        jsonResponse(['token' => $token], 'Login successful', 200);
     }
 
     public function logout($headers)
@@ -44,6 +43,6 @@ class AuthController
         $token = trim(str_replace('Bearer', '', $headers['Authorization']));
         deleteToken($token);
 
-        jsonResponse(['message' => 'Logged out']);
+        jsonResponse(null, 'Logged out successfully', 200);
     }
 }

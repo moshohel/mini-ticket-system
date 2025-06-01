@@ -16,7 +16,7 @@ function authMiddleware(): array|null
     $tokensFile = __DIR__ . '/../storage/tokens.json';
     if (!file_exists($tokensFile)) {
         http_response_code(401);
-        echo json_encode(['error' => 'Unauthorized']);
+        echo json_encode(['error' => 'Unauthorized token not found']);
         exit;
     }
 

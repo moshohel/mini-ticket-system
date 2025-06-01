@@ -1,9 +1,13 @@
 <?php
 
-function jsonResponse($data, $code = 200)
+function jsonResponse($data = null, $message = '', $status = 200, $error = null)
 {
-    http_response_code($code);
-    header('Content-Type: application/json');
-    echo json_encode($data);
+    http_response_code($status);
+    echo json_encode([
+        'status' => $status,
+        'message' => $message,
+        'data' => $data,
+        'error' => $error
+    ]);
     exit;
 }
